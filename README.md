@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 5. Prepare the Disease Details File:
 Ensure the disease_info.json file exists in the project directory. It should contain information about each disease in the following format:
-'''
+```
 {  
     "Disease_Name": {  
         "description": "Brief description of the disease.",  
@@ -35,11 +35,11 @@ Ensure the disease_info.json file exists in the project directory. It should con
         "plant_info": "General information about the plant."  
     }  
 }  
-'''
-6. Set Up Upload Folder:
+```
+7. Set Up Upload Folder:
 The app will store uploaded files in an uploads directory. This folder will be created automatically when you run the app.
 
-7. Run the Application:
+8. Run the Application:
 Start the Flask app using:
 python app.py
  
