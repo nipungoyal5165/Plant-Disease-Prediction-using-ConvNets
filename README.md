@@ -1,7 +1,7 @@
 # Plant-Disease-Prediction-using-ConvNets
 This project is a Flask-based web application designed to identify plant diseases from leaf images using a trained Convolutional Neural Network (CNN). The application provides users with the disease classification, detailed information about the identified disease, and best practices for plant care.
 
-Features:-
+### Features:-
 
 1. Disease Detection: Identify whether a plant leaf shows signs of a specific disease or is healthy.
 2. Confidence Levels: Get the confidence score for each prediction.
@@ -21,8 +21,8 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 3. Install Dependencies:
-```
 Ensure you have Python 3.8+ installed. Then, run:
+```
 pip install -r requirements.txt  
 ```
 
