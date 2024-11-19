@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ predicted_class }} Information</title> <!-- Dynamic title based on predicted class -->
+    <style>
+        /* Main styling for the detailed information page */
+        body {
+            font-family: Arial, sans-serif; /* Set font */
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5; /* Light background color */
+            height: auto;
+        }
+        .container {
+            background: #ffffff; /* White background for content container */
+            padding: 20px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            max-width: 600px; /* Limit width for readability */
+            margin: 0 auto;
+            margin-bottom: auto;
+        }
+        h1 {
+            color: #2e7d32; /* Green color for the main heading */
+        }
+        p {
+            margin: 20px 20px; /* Margin for paragraph text */
+            text-align: justify; /* Justified text alignment */
+            text-justify: inter-word; /* Improved word spacing for justification */
+        }
+        h3 {
+            margin: 20px 20px; /* Margin for subheadings */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><center>Disease Information</center></h1> <!-- Main heading centered -->
+        
+        <!-- Section for disease description -->
+        <h3><strong>Description<br></strong></h3>
+        <p> {{ details['description'] }} </p> <!-- Dynamic content for description -->
+        
+        <!-- Section for disease commonality -->
+        <h3><strong>Commonality<br></strong></h3>
+        <p> {{ details['commonality'] }} </p> <!-- Dynamic content for commonality -->
+        
+        <!-- Section for disease prevention -->
+        <h3><strong>Prevention<br></strong></h3>
+        <p> {{ details['prevention'] }} </p> <!-- Dynamic content for prevention -->
+        
+        <!-- Section for general plant information -->
+        <h3><strong>Plant Information<br></strong></h3>
+        <p> {{ details['plant_info'] }} </p> <!-- Dynamic content for plant information -->
+    </div>
+</body>
+</html>

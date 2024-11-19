@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detector</title> <!-- Page title -->
+    <style>
+        /* Style for the body with a background image */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url({{ url_for('static', filename='plantbg.jfif') }}); /* Dynamic background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Style for the main container */
+        .container {
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+            padding: 30px;
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 26px;
+            color: #2e7d32; /* Green color for header */
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Form and file input styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            display: none; /* Hides the default file input */
+        }
+
+        /* Custom label styling for file upload */
+        label {
+            background-color: #7b1fa2;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer; /* Pointer cursor for clickable label */
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        /* Submit button styling */
+        input[type="submit"] {
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on hover */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3700b3;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Message styling for success/error */
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: #e53935;
+            background-color: #ffebee;
+        }
+
+        .success {
+            color: #388e3c;
+            background-color: #e8f5e9;
+        }
+
+        /* Image preview styling */
+        #image-preview {
+            display: none; /* Hidden initially */
+            margin-top: 20px;
+            max-width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Confidence levels styling */
+        .confidence-levels {
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .confidence-levels ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .confidence-levels li {
+            margin: 5px 0;
+        }
+
+        /* Highlight styling for highest confidence level */
+        .highlight {
+            font-weight: bold;
+            color: #388e3c;
+            background-color: #e8f5e9;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        /* Details button styling */
+        #details-button {
+            margin-top: 20px;
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            display: none; /* Initially hidden */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #details-button:hover {
+            background-color: #004d40;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Plant Disease Detector</h1> <!-- Page heading -->
+        <h2>Share a picture of a plant!</h2> <!-- Instruction subheading -->
+        
+        <!-- Form for file upload -->
+        <form id="upload-form" action="/predict" method="post" enctype="multipart/form-data">
+            <label for="file">Select Image</label> <!-- Custom label for file upload -->
+            <input type="file" id="file" name="file" accept="image/*" required> <!-- Hidden file input field -->
+            <img id="image-preview" src="#" alt="Selected Image Preview"><br><br> <!-- Image preview section -->
+            <input type="submit" value="Analyze"> <!-- Submit button to analyze image -->
+        </form>
+        
+        <!-- Message display for errors or success -->
+        <div class="message" id="message"></div>
+        
+        <!-- Confidence levels display -->
+        <div class="confidence-levels" id="confidence-levels"></div>
+        
+        <!-- Details button to view more information -->
+        <center><button id="details-button">Details</button></center>
+    </div>
+
+    <script>
+        let predictedClass = ''; // Variable to store the predicted class
+
+        // Preview the selected image
+        document.getElementById('file').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('image-preview');
+            
+            if (file) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block'; // Show the preview
+                };
+                
+                reader.readAsDataURL(file); // Convert file to data URL
+            } else {
+                preview.style.display = 'none'; // Hide preview if no file is selected
+            }
+        });
+
+        // Handle form submission to analyze the image
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            var formData = new FormData(this);
+            var messageDiv = document.getElementById('message');
+            var confidenceLevelsDiv = document.getElementById('confidence-levels');
+            var detailsButton = document.getElementById('details-button');
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display prediction result if available
+                if (data.predicted_class) {
+                    predictedClass = data.predicted_class;
+                    messageDiv.innerHTML = `<p class="success">Predicted Class: ${data.predicted_class}</p>`;
+                    
+                    // Display confidence levels with highlighting for the highest level
+                    let confidenceHTML = '<h3>Confidence Levels:</h3><ul>';
+                    for (let [className, confidence] of Object.entries(data.confidence_levels)) {
+                        const isHighest = className === data.predicted_class;
+                        const highlightClass = isHighest ? 'highlight' : '';
+                        confidenceHTML += `<li class="${highlightClass}">${className}: ${(confidence * 100).toFixed(2)}%</li>`;
+                    }
+                    confidenceHTML += '</ul>';
+                    confidenceLevelsDiv.innerHTML = confidenceHTML;
+
+                    detailsButton.style.display = 'block'; // Show the Details button
+                } else {
+                    // Display error if prediction fails
+                    messageDiv.innerHTML = `<p class="error">An error occurred. Please try again.</p>`;
+                    confidenceLevelsDiv.innerHTML = '';
+                    detailsButton.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                // Display error message on network or server error
+                messageDiv.innerHTML = `<p class="error">An error occurred: ${error}</p>`;
+                confidenceLevelsDiv.innerHTML = '';
+                detailsButton.style.display = 'none';
+            });
+        });
+
+        // Redirect to details page on Details button click
+        document.getElementById('details-button').addEventListener('click', function() {
+            if (predictedClass) {
+                window.location.href = `/details/${encodeURIComponent(predictedClass)}`;
+            }
+        });
+    </script>
+</body>
+</html>
