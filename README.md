@@ -7,7 +7,7 @@ Features:-
 2. Confidence Levels: Get the confidence score for each prediction.
 3. Disease Details: Access additional information about the disease, such as description, commonality, prevention tips, and plant growth requirements.
 
-# Setup and Installation:-
+## Setup and Installation:-
 1. Clone the Repository:
 git clone https://github.com/your-username/plant-disease-detection.git  
 cd plant-disease-detection  
@@ -45,7 +45,7 @@ python app.py
  
 Access the app in your browser at http://127.0.0.1:5000.
 
-# User Instructions
+## User Instructions
 1. Home Page:
 - Navigate to the homepage at http://127.0.0.1:5000.
 - You'll see a file upload form.
@@ -57,8 +57,9 @@ Access the app in your browser at http://127.0.0.1:5000.
 3. Predict Disease:
 - After uploading the image, click "Predict."
 - The app will process the image and return:
--- The predicted disease name.
--- Confidence scores for each disease.
+  - The predicted disease name.
+  - Confidence scores for each disease.
+
 
 4. View Disease Details:
 - If a disease is detected, click the Details button to learn more about the disease, including its description, prevention methods, and plant information.
