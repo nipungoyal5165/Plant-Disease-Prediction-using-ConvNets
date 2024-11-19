@@ -44,3 +44,21 @@ Start the Flask app using:
 python app.py
  
 Access the app in your browser at http://127.0.0.1:5000.
+
+# User Instructions
+1. Home Page:
+- Navigate to the homepage at http://127.0.0.1:5000.
+- You'll see a file upload form.
+
+2. Upload a Leaf Image:
+- Click "Choose File" and select an image of a plant leaf.
+- Ensure the image is in one of the supported formats: .jpg, .jpeg, .png.
+
+3. Predict Disease:
+- After uploading the image, click "Predict."
+- The app will process the image and return:
+-- The predicted disease name.
+-- Confidence scores for each disease.
+
+4. View Disease Details:
+- If a disease is detected, click the Details button to learn more about the disease, including its description, prevention methods, and plant information.
