@@ -30,6 +30,9 @@ pip install -r requirements.txt
 - Place your trained model file (plant_disease_detector.keras) in the project directory.
 - Include the class_indices.json file, which maps class indices to disease names.
 
+> [!CAUTION]
+> PLease note to change the path of dataset while accessing it through main.py (Line 14) according to your own system placement.
+
 5. Prepare the Disease Details File:
 Ensure the disease_info.json file exists in the project directory. It should contain information about each disease in the following format:
 ```
