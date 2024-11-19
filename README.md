@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 5. Prepare the Disease Details File:
 Ensure the disease_info.json file exists in the project directory. It should contain information about each disease in the following format:
-
+'''
 {  
     "Disease_Name": {  
         "description": "Brief description of the disease.",  
@@ -35,7 +35,7 @@ Ensure the disease_info.json file exists in the project directory. It should con
         "plant_info": "General information about the plant."  
     }  
 }  
-
+'''
 6. Set Up Upload Folder:
 The app will store uploaded files in an uploads directory. This folder will be created automatically when you run the app.
 
@@ -63,3 +63,31 @@ Access the app in your browser at http://127.0.0.1:5000.
 
 4. View Disease Details:
 - If a disease is detected, click the Details button to learn more about the disease, including its description, prevention methods, and plant information.
+
+## File Structure
+plant-disease-detection/  
+├── app.py                  # Main application script  
+├── plant_disease_detector.keras  # Trained model file  
+├── class_indices.json      # Mapping of class indices to disease names  
+├── disease_info.json       # Detailed disease information  
+├── templates/              # HTML templates for the Flask app  
+│   ├── index.html          # Homepage template  
+│   ├── details.html        # Disease details page template  
+├── uploads/                # Directory for uploaded images  
+├── static/                 # Directory for static files (e.g., CSS, JS)  
+├── requirements.txt        # Python dependencies  
+└── README.md               # Project documentation  
+
+## Troubleshooting
+- Module Not Found: If you encounter ModuleNotFoundError, ensure all required libraries are installed using pip install -r requirements.txt.
+- File Upload Issues: Verify that the uploads/ directory exists and has write permissions.
+- Model File Not Found: Confirm that plant_disease_detector.keras is in the root directory.
+- Flask App Not Running: Ensure you have activated the virtual environment (if applicable) and that the correct Python version is being used.
+
+## Future Enhancements
+- Adding features to highlight disease spots on the leaf image.
+- Expanding the model to include additional plant species and diseases.
+- Improving the user interface for a better user experience.
+
+> [!TIP]
+> Feel free to contribute to this project by forking the repository and submitting pull requests!
