@@ -31,7 +31,7 @@ pip install -r requirements.txt
 - Include the class_indices.json file, which maps class indices to disease names.
 
 > [!CAUTION]
-> Please note to change the path of dataset while accessing it through **main.py** (Line 14) according to your own local location.
+> Please note to change the path of dataset while accessing it through **_main.py_** (Line 14) according to your own local location.
 
 5. Prepare the Disease Details File:
 Ensure the disease_info.json file exists in the project directory. It should contain information about each disease in the following format:
