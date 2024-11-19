@@ -7,7 +7,7 @@ Features:-
 2. Confidence Levels: Get the confidence score for each prediction.
 3. Disease Details: Access additional information about the disease, such as description, commonality, prevention tips, and plant growth requirements.
 
-Setup and Installation:-
+# Setup and Installation:-
 1. Clone the Repository:
 git clone https://github.com/your-username/plant-disease-detection.git  
 cd plant-disease-detection  
@@ -26,6 +26,7 @@ pip install -r requirements.txt
 
 5. Prepare the Disease Details File:
 Ensure the disease_info.json file exists in the project directory. It should contain information about each disease in the following format:
+
 {  
     "Disease_Name": {  
         "description": "Brief description of the disease.",  
