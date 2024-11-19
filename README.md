@@ -9,16 +9,22 @@ Features:-
 
 ## Setup and Installation:-
 1. Clone the Repository:
+```
 git clone https://github.com/your-username/plant-disease-detection.git  
 cd plant-disease-detection  
+```
 
 2. Set Up a Virtual Environment (Recommended):
+```
 python -m venv venv  
 source venv/bin/activate  # On Windows: venv\Scripts\activate  
+```
 
 3. Install Dependencies:
+```
 Ensure you have Python 3.8+ installed. Then, run:
 pip install -r requirements.txt  
+```
 
 4. Prepare the Model and Class Indices:
 - Place your trained model file (plant_disease_detector.keras) in the project directory.
@@ -41,8 +47,10 @@ The app will store uploaded files in an uploads directory. This folder will be c
 
 8. Run the Application:
 Start the Flask app using:
+```
 python app.py
- 
+```
+
 Access the app in your browser at http://127.0.0.1:5000.
 
 ## User Instructions
@@ -65,6 +73,7 @@ Access the app in your browser at http://127.0.0.1:5000.
 - If a disease is detected, click the Details button to learn more about the disease, including its description, prevention methods, and plant information.
 
 ## File Structure
+```
 plant-disease-detection/  
 ├── app.py                  # Main application script  
 ├── plant_disease_detector.keras  # Trained model file  
@@ -77,6 +86,7 @@ plant-disease-detection/
 ├── static/                 # Directory for static files (e.g., CSS, JS)  
 ├── requirements.txt        # Python dependencies  
 └── README.md               # Project documentation  
+```
 
 ## Troubleshooting
 - Module Not Found: If you encounter ModuleNotFoundError, ensure all required libraries are installed using pip install -r requirements.txt.
@@ -88,6 +98,7 @@ plant-disease-detection/
 - Adding features to highlight disease spots on the leaf image.
 - Expanding the model to include additional plant species and diseases.
 - Improving the user interface for a better user experience.
+
 
 > [!TIP]
 > Feel free to contribute to this project by forking the repository and submitting pull requests!
