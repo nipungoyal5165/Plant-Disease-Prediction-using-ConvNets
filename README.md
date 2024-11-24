@@ -30,9 +30,6 @@ pip install -r requirements.txt
 - Place your trained model file (plant_disease_detector.keras) in the project directory.
 - Include the class_indices.json file, which maps class indices to disease names.
 
-> [!CAUTION]
-> Please note to change the path of dataset while accessing it through **_main.py_** (Line 14) according to your own local location.
-
 > [!IMPORTANT]
 > Kindly find the CNN model in this google drive public link due to size restrictions on Github - https://drive.google.com/drive/folders/1fVIBqPGyQt_elMXkpbpD9qxwQIGgk_1r?usp=sharing
 
